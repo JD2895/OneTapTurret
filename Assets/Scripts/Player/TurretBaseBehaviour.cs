@@ -4,37 +4,37 @@ using UnityEngine;
 
 namespace JD.OTT
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody))]
     public class TurretBaseBehaviour : MonoBehaviour
     {
-        private bool _turnDirection = false;    // 0 = turn left, 1 = turn right
-        private Rigidbody2D _rb;
+        private bool turnDirection = false;    // 0 = turn left, 1 = turn right
+        private Rigidbody rb;
         [SerializeField]
-        private float _turnRate = 3f;
+        private float turnRate = 1.5f;
 
-        public bool TurnDirection { get { return _turnDirection; } }
+        public bool TurnDirection { get { return turnDirection; } }
 
         void Start()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody>();
         }
 
         void Update()
         {
-            if (_turnDirection)
+            if (turnDirection)
             {
-                _rb.rotation += _turnRate;
+                rb.rotation *= Quaternion.Euler(Vector3.up * turnRate);
             }
             else
             {
-                _rb.rotation -= _turnRate;
+                rb.rotation *= Quaternion.Euler(Vector3.up * -turnRate);
             }
         }
 
         public bool ChangeTurnDirection()
         {
-            _turnDirection = !_turnDirection;
-            return _turnDirection;
+            turnDirection = !turnDirection;
+            return turnDirection;
         }
 
         public float GetCurrentDirection()

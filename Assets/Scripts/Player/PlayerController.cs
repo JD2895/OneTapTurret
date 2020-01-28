@@ -7,9 +7,9 @@ namespace JD.OTT
     public class PlayerController : MonoBehaviour
     {
         public TurretBaseBehaviour turretBase;
-        public TurretBarrelBehaviour turrretBarrel;
-        public UpgradeManager upgradeManager;
-        public GameObject basicProjectilePrefab;
+        //public TurretBarrelBehaviour turrretBarrel;
+        //public UpgradeManager upgradeManager;
+        //public GameObject basicProjectilePrefab;
 
         private bool readyToFire = true;
 
@@ -32,7 +32,7 @@ namespace JD.OTT
             {
             }
 
-            upgradeManager.PlayerUpdate();
+            //upgradeManager.PlayerUpdate();
         }
 
         public void ChangeTurretTurnDirection()
@@ -44,7 +44,7 @@ namespace JD.OTT
         {
             if (readyToFire)
             {
-                turrretBarrel.FireProjectile(basicProjectilePrefab, turretBase.GetCurrentDirection());
+                //turrretBarrel.FireProjectile(basicProjectilePrefab, turretBase.GetCurrentDirection());
                 StartCoroutine(FireCooldown());
             }
         }

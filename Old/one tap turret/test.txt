@@ -1,0 +1,21 @@
+{
+    "nodeSeq": [
+        {
+            "enemTyp": 0,
+            "allowedSpawnArea": [
+                3
+            ],
+            "delayTillSpawning": 5.0
+        },
+        {
+            "enemTyp": 1,
+            "allowedSpawnArea": [
+                5,
+                6
+            ],
+            "delayTillSpawning": 3.200000047683716
+        }
+    ]
+}
+
+{"nodeSeq":[{"enemTyp":0,"allowedSpawnArea":[3],"delayTillSpawning":5.0},{"enemTyp":1,"allowedSpawnArea":[5,6],"delayTillSpawning":3.200000047683716}]}

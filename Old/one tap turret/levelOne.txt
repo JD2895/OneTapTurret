@@ -1,0 +1,66 @@
+{
+    "nodeList": [
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5
+            ],
+            "delayTillSpawn": 5.0
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+		6
+            ],
+            "delayTillSpawn": 1.5
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5,
+		6
+            ],
+            "delayTillSpawn": 0.5
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5,
+		6
+            ],
+            "delayTillSpawn": 1.5
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5,
+		6
+            ],
+            "delayTillSpawn": 0.4
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5,
+		6
+            ],
+            "delayTillSpawn": 0.4
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5,
+		6
+            ],
+            "delayTillSpawn": 0.3
+        },
+        {
+            "enemyType": 0,
+            "allowableSpawnArea": [
+                5,
+		6
+            ],
+            "delayTillSpawn": 0.5
+        }
+    ]
+}

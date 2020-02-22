@@ -7,19 +7,18 @@ namespace JD.OTT
 {
     public class TurretBarrelBehaviour : MonoBehaviour
     {
-        public void FireProjectile(GameObject projectilePrefab, float direction)
+        public void FireProjectile(GameObject projectilePrefab)
         {
-            Vector3 initialPosition = Vector3.zero;
-            Vector2 directionToFire = SpecMath.GetXYComponents(direction % 360);
+            Vector3 initialPosition = this.transform.position;
+            Vector3 directionToFire = this.transform.up;
 
             // Move the initial position to a barrel's length away
-            initialPosition.x = directionToFire.x * this.transform.localScale.y;
-            initialPosition.y = directionToFire.y * this.transform.localScale.y;
-            
-            // Always instantiate slightly behind the barrel
-            initialPosition.z = this.transform.position.z + 0.1f;
-            
+            initialPosition += directionToFire * this.transform.localScale.y;
+
+            // Instantiate the projectile
             GameObject newProjectile = Instantiate(projectilePrefab, initialPosition, Quaternion.identity);
+
+            // Fire the projectile
             newProjectile.GetComponent<BasicProjectileBehaviour>().StartFire(directionToFire);
         }
     }

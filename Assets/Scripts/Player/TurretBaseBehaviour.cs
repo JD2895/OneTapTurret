@@ -39,7 +39,7 @@ namespace JD.OTT
 
         public float GetCurrentDirection()
         {
-            return this.transform.eulerAngles.z;
+            return this.transform.eulerAngles.y;
         }
     }
 }

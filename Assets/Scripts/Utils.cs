@@ -7,48 +7,49 @@ namespace JD.Utils
     public class SpecMath
     {
 
-        public static Vector2 GetXYComponents(float angleFromYaxis)
+        public static Vector2 GetXZComponents(float clockwiseAngleFromZaxis)
         {
+            //Debug.Log(clockwiseAngleFromZaxis);
             float xComponent;
-            float yComponent;
-            int xMultiplier = 1;
-            int yMultiplier = 1;
+            float zComponent;
+            int xMultiplier = -1;
+            int zMultiplier = 1;
 
-            if (Mathf.Abs(angleFromYaxis) >= 180)
+            if (Mathf.Abs(clockwiseAngleFromZaxis) >= 180)
             {
-                yMultiplier *= -1;
+                zMultiplier *= -1;
                 xMultiplier *= -1;
             }
 
-            angleFromYaxis %= 180f;
+            clockwiseAngleFromZaxis %= 180f;
 
-            if (Mathf.Abs(angleFromYaxis) >= 90)
+            if (Mathf.Abs(clockwiseAngleFromZaxis) >= 90)
             {
-                if (angleFromYaxis > 0)
+                if (clockwiseAngleFromZaxis > 0)
                 {
                     xMultiplier *= -1;
                 }
-                yMultiplier *= -1;
-                angleFromYaxis %= 90;
+                zMultiplier *= -1;
+                clockwiseAngleFromZaxis %= 90;
             }
             else
             {
-                if (angleFromYaxis > 0)
+                if (clockwiseAngleFromZaxis > 0)
                 {
                     xMultiplier *= -1;
                 }
-                angleFromYaxis = 90 - angleFromYaxis;
+                clockwiseAngleFromZaxis = 90 - clockwiseAngleFromZaxis;
             }
 
-            xComponent = Mathf.Cos(angleFromYaxis * Mathf.Deg2Rad);
-            yComponent = Mathf.Sin(angleFromYaxis * Mathf.Deg2Rad);
+            xComponent = Mathf.Cos(clockwiseAngleFromZaxis * Mathf.Deg2Rad);
+            zComponent = Mathf.Sin(clockwiseAngleFromZaxis * Mathf.Deg2Rad);
 
-            return new Vector2(xComponent * xMultiplier, yComponent * yMultiplier);
+            return new Vector2(xComponent * xMultiplier, zComponent * zMultiplier);
         }
 
         public static Vector2 GetScreenEdgePosition(ScreenSection screenSect, float percentFromCentre)
         {
-            float xPosition = 0, yPosition = 0;
+            float xPosition = 0, zPosition = 0;
             float screenWidth = Screen.width;
             float screenHeight = Screen.height;
             float halfScreenWidth = Screen.width / 2;
@@ -60,23 +61,23 @@ namespace JD.Utils
 
             switch (screenSect){
                 case ScreenSection.Top:
-                    yPosition = screenHeight;
+                    zPosition = screenHeight;
                     xPosition = halfScreenWidth * percentFromCentre;
                     xPosition += halfScreenWidth;
                     break;
                 case ScreenSection.Bottom:
-                    yPosition = 0;
+                    zPosition = 0;
                     xPosition = halfScreenWidth * percentFromCentre;
                     xPosition += halfScreenWidth;
                     break;
                 case ScreenSection.Right:
-                    yPosition = halfScreenHeight * percentFromCentre;
-                    yPosition += halfScreenHeight;
+                    zPosition = halfScreenHeight * percentFromCentre;
+                    zPosition += halfScreenHeight;
                     xPosition = screenWidth;
                     break;
                 case ScreenSection.Left:
-                    yPosition = halfScreenHeight * percentFromCentre;
-                    yPosition += halfScreenHeight;
+                    zPosition = halfScreenHeight * percentFromCentre;
+                    zPosition += halfScreenHeight;
                     xPosition = 0;
                     break;
                 case ScreenSection.TopOverflow:
@@ -87,13 +88,13 @@ namespace JD.Utils
                     {
                         xPosition = percentFromCentre * totalHalfLength;
                         xPosition += halfScreenWidth;
-                        yPosition = screenHeight;
+                        zPosition = screenHeight;
                     }
                     else
                     {
                         xPosition = halfScreenWidth * (percentFromCentre / Mathf.Abs(percentFromCentre));
                         xPosition += halfScreenWidth;
-                        yPosition = screenHeight - ((Mathf.Abs(percentFromCentre) * totalHalfLength) - halfScreenWidth);
+                        zPosition = screenHeight - ((Mathf.Abs(percentFromCentre) * totalHalfLength) - halfScreenWidth);
                     }
                     break;
                 case ScreenSection.BottomOverflow:
@@ -104,13 +105,13 @@ namespace JD.Utils
                     {
                         xPosition = percentFromCentre * totalHalfLength;
                         xPosition += halfScreenWidth;
-                        yPosition = 0;
+                        zPosition = 0;
                     }
                     else
                     {
                         xPosition = halfScreenWidth * (percentFromCentre / Mathf.Abs(percentFromCentre));
                         xPosition += halfScreenWidth;
-                        yPosition = ((Mathf.Abs(percentFromCentre) * totalHalfLength) - halfScreenWidth);
+                        zPosition = ((Mathf.Abs(percentFromCentre) * totalHalfLength) - halfScreenWidth);
                     }
                     break;
                 case ScreenSection.All:
@@ -122,27 +123,27 @@ namespace JD.Utils
                     {
                         xPosition = (percentFromCentre * totalHalfLength) + screenHeight;
                         xPosition += screenWidth;
-                        yPosition = screenHeight;
+                        zPosition = screenHeight;
                     }
                     else if (percentFromCentre < 0)             // right of screen
                     {
                         xPosition = screenWidth; 
-                        yPosition = Mathf.Abs(percentFromCentre) * totalHalfLength;
+                        zPosition = Mathf.Abs(percentFromCentre) * totalHalfLength;
                     }
                     else if (percentFromCentre < widthPercent)  // bottom of screen
                     {
                         xPosition = screenWidth - (percentFromCentre * totalHalfLength);
-                        yPosition = 0;
+                        zPosition = 0;
                     }
                     else                                        // left of screen
                     {
                         xPosition = 0;
-                        yPosition = (percentFromCentre * totalHalfLength) - screenWidth;
+                        zPosition = (percentFromCentre * totalHalfLength) - screenWidth;
                     }
                     break;
             }
 
-            return new Vector2(xPosition, yPosition);
+            return new Vector2(xPosition, zPosition);
         }
     }
 

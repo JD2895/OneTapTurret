@@ -8,7 +8,7 @@ namespace JD.OTT
 {
     public class SpawnManager : MonoBehaviour
     {
-        public float spawnPositionZ = -0.1f;
+        //public float spawnPositionZ = -0.1f;
         public Transform player;
 
         public GameObject basicEnemyPrefab;
@@ -30,9 +30,9 @@ namespace JD.OTT
         {
             // Get position based on 'sectionToSpawn'
             Vector2 screenPos = SpecMath.GetScreenEdgePosition(sectionToSpawn, UnityEngine.Random.Range(-1f, 1f));
-            Vector3 worldPos = new Vector3(screenPos.x, screenPos.y, 0);
+            Vector3 worldPos = new Vector3(screenPos.x, 0.02f, screenPos.y);
             worldPos = Camera.main.ScreenToWorldPoint(worldPos);
-            worldPos.z = spawnPositionZ;
+            //worldPos.z = spawnPositionZ;
 
             // Move the position slightly offscreen
             worldPos += (worldPos - player.position) * 0.1f;

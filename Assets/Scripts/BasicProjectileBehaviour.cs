@@ -4,26 +4,31 @@ using UnityEngine;
 
 namespace JD.OTT
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody))]
     public class BasicProjectileBehaviour : MonoBehaviour
     {
-        private Rigidbody2D _rb;
-        private Vector2 direction = Vector2.up;
+        private Rigidbody rb;
+        private Vector3 direction = Vector3.zero;
 
         [SerializeField]
-        private float lifeTime = 0.1f;
+        private float lifeTime = 0.5f;
         [SerializeField]
-        private float speed = 0.2f;
+        private float speed = 0.4f;
 
         void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody>();
+
+            // Destroy this object after set amount of time
             Destroy(this.gameObject, lifeTime);
         }
 
-        public void StartFire(Vector2 directionToFire)
+        public void StartFire(Vector3 directionToFire)
         {
-            direction = directionToFire;
+            // Rotate object to face the direction it will be fired in
+            this.transform.rotation = Quaternion.LookRotation(directionToFire);
+
+            // Fire the object
             StartCoroutine(Firing());
             
         }
@@ -32,10 +37,10 @@ namespace JD.OTT
         {
             while(true)
             {
+                // Constantly move this object forward
                 Vector3 nextPosition = this.transform.position;
-                nextPosition.x += direction.x * speed;
-                nextPosition.y += direction.y * speed;
-                _rb.MovePosition(nextPosition);
+                nextPosition += this.transform.forward * speed;
+                rb.MovePosition(nextPosition);
                 yield return null;
             }
         }
